@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="345.0" prefWidth="619.0" style="-fx-background-color: #0A1172;" VBox.vgrow="ALWAYS">
+      <children>
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="376.0" layoutY="108.0" nodeOrientation="INHERIT" opacity="0.75">
+               <image>
+                   <Image url="images/venera.png" />
+
+
+               </image>
+               <effect>
+                  <Shadow height="118.41" radius="63.17" width="136.27">
+                     <color>
+                        <Color red="0.7469000220298767" green="0.8658866882324219" blue="0.9700000286102295" opacity="0.671732485294342" />
+                     </color>
+                  </Shadow>
+               </effect>
+            </ImageView>
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="377.0" layoutY="119.0" nodeOrientation="INHERIT">
+               <image>
+                   <Image url="images/venera.png" />
+               </image>
+            </ImageView>
+        <Label alignment="CENTER" layoutX="358.0" layoutY="95.0" style="&#10;" text="косметический салон" textAlignment="CENTER" textFill="#a3b9ff" wrapText="false">
+          <font>
+            <Font name="Playbill" size="13.0" />
+          </font>
+        </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="344.0" layoutY="49.0" style="&#10;" text="ВЕНЕРА" textAlignment="CENTER" textFill="#c5cdff" wrapText="false">
+               <font>
+                  <Font name="Playbill" size="44.0" />
+               </font>
+               <effect>
+                  <DropShadow height="72.47" radius="31.055" spread="0.14" width="53.75">
+                     <color>
+                        <Color red="0.9894444346427917" green="1.0" blue="0.7888888716697693" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Label>
+            <Label alignment="CENTER" layoutX="58.0" layoutY="92.0" style="&#10;" text="АВТОРИЗАЦИЯ" textAlignment="CENTER" textFill="#a1b6ffd4" wrapText="false">
+               <font>
+                  <Font name="Playbill" size="17.0" />
+               </font>
+            </Label>
+            <PasswordField layoutX="70.0" layoutY="167.0" prefHeight="26.0" prefWidth="163.0" promptText="пароль" style="-fx-background-color: #FFFAFA;" />
+            <TextField layoutX="70.0" layoutY="126.0" prefHeight="26.0" prefWidth="163.0" promptText="телефон" style="-fx-background-color: #FFFAFA;" />
+            <Button cancelButton="true" layoutX="114.0" layoutY="205.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="75.0" style="-fx-background-color: #FFFAFA;" text="войти" textFill="#000b7e">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c5cdff" height="401.0" layoutX="12.8" layoutY="26.0" stroke="#c5cdff" strokeType="INSIDE" width="14.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <effect>
+                  <Shadow>
+                     <color>
+                        <Color red="0.7799999713897705" green="0.8130000233650208" blue="1.0" opacity="0.43769001960754395" />
+                     </color>
+                  </Shadow>
+               </effect>
+            </Rectangle>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c5cdff" height="14.0" layoutX="-7.2" layoutY="362.0" stroke="#c5cdff" strokeType="INSIDE" width="647.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-7.0">
+               <effect>
+                  <Shadow>
+                     <color>
+                        <Color red="0.7799999713897705" green="0.8130000233650208" blue="1.0" opacity="0.43769001960754395" />
+                     </color>
+                  </Shadow>
+               </effect>
+            </Rectangle>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c5cdff" height="401.0" layoutX="608.0" layoutY="-1.0" stroke="#c5cdff" strokeType="INSIDE" width="14.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <effect>
+                  <Shadow>
+                     <color>
+                        <Color red="0.7799999713897705" green="0.8130000233650208" blue="1.0" opacity="0.43769001960754395" />
+                     </color>
+                  </Shadow>
+               </effect>
+            </Rectangle>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c5cdff" height="14.0" layoutX="13.0" layoutY="372.0" stroke="#c5cdff" strokeType="INSIDE" width="615.0" AnchorPane.topAnchor="0.0">
+               <effect>
+                  <Shadow>
+                     <color>
+                        <Color red="0.7799999713897705" green="0.8130000233650208" blue="1.0" opacity="0.43769001960754395" />
+                     </color>
+                  </Shadow>
+               </effect>
+            </Rectangle>
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>
