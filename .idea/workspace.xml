@@ -5,20 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a9318482-984f-49c7-bfa3-451f4d24fa90" name="Changes" comment="First commit: the connection between the server and the client">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/condorcet/Enums/RequestType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/condorcet/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/condorcet/Models/Entities/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/condorcet/Models/Entities/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/condorcet/Models/TCP/Request.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/condorcet/Models/TCP/Response.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/condorcet/Services/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/condorcet/Utility/ClientThread.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/condorcet/interfaces/Service.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/condorcet/DataAccessObjects/ClientDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/condorcet/DataAccessObjects/UserDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/condorcet/Validation/UserValidation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/condorcet/database/DatabaseInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/Models/Entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/Models/Entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/Models/TCP/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/Models/TCP/Response.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/Utility/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/Utility/ClientThread.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,11 +53,13 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/celjd/курсач 5 сем/прога/Server",
+    "last_opened_file_path": "C:/Users/celjd/курсач 5 сем/прога/Server_venera",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "spring.configuration.checksum": "617e49878ce4bee1b2237c842bb9bfab",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -76,6 +74,7 @@
       <workItem from="1730121384831" duration="92000" />
       <workItem from="1730121538666" duration="3820000" />
       <workItem from="1730644064271" duration="3465000" />
+      <workItem from="1731437642526" duration="2496000" />
     </task>
     <servers />
   </component>
@@ -85,5 +84,10 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First commit: the connection between the server and the client" />
     <option name="LAST_COMMIT_MESSAGE" value="First commit: the connection between the server and the client" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Server_venera$Main.ic" NAME="Main Coverage Results" MODIFIED="1731275006736" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>condorcet.*</FILTER>
+    </SUITE>
   </component>
 </project>
