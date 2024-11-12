@@ -1,0 +1,10 @@
+/* Стили для кнопки */
+.button {
+    -fx-background-color: #f7f7f7;
+    -fx-border-color: transparent; /* Изначально без обводки */
+    -fx-border-width: 2px; /* Толщина обводки */
+}
+
+.button:hover {
+    -fx-border-color: #00bfff; /* Голубая обводка при наведении */
+}

@@ -43,9 +43,9 @@
    <right>
       <AnchorPane prefHeight="500.0" prefWidth="392.0" style="-fx-background-color: #bbd4fc;" BorderPane.alignment="CENTER">
          <children>
-            <TextField layoutX="70.0" layoutY="214.0" prefHeight="26.0" prefWidth="170.0" promptText="login" style="-fx-background-color: transparent; -fx-border-color: #0A1172; -fx-border-width: 0px 0px 2px 0px;" />
-            <PasswordField layoutX="70.0" layoutY="257.0" prefHeight="26.0" prefWidth="170.0" promptText="password" style="-fx-background-color: transparent; -fx-border-color: #0A1172; -fx-border-width: 0px 0px 2px 0px;" />
-            <Button fx:id="buttonLogin" layoutX="110.0" layoutY="309.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: #0A1172;" text="войти" textFill="WHITE" />
+            <TextField fx:id="textFieldLogin" layoutX="70.0" layoutY="214.0" prefHeight="26.0" prefWidth="170.0" promptText="login" style="-fx-background-color: transparent; -fx-border-color: #0A1172; -fx-border-width: 0px 0px 2px 0px;" />
+            <PasswordField fx:id="passwordField" layoutX="70.0" layoutY="257.0" prefHeight="26.0" prefWidth="170.0" promptText="password" style="-fx-background-color: transparent; -fx-border-color: #0A1172; -fx-border-width: 0px 0px 2px 0px;" />
+            <Button fx:id="buttonLogin" layoutX="110.0" layoutY="309.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: #0A1172;" text="войти" textFill="WHITE" onAction="#Login_Pressed"/>
             <Hyperlink fx:id="buttonRegister" layoutX="117.0" layoutY="417.0" text="регистрация" textFill="#0a1172" onAction="#Register_Pressed"/>
             <ImageView fitHeight="86.0" fitWidth="86.0" layoutX="113.0" layoutY="105.0" opacity="0.0">
                <image>

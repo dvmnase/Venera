@@ -46,7 +46,7 @@
                   <Font size="13.0" />
                </font>
             </Hyperlink>
-            <Button fx:id="buttonRegister" layoutX="73.0" layoutY="426.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="159.0" style="-fx-background-color: #0a1172;" text="зарегистрироваться" textFill="#fffefe">
+            <Button fx:id="buttonRegister" layoutX="73.0" layoutY="426.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="159.0" style="-fx-background-color: #0a1172;" text="зарегистрироваться" textFill="#fffefe" onAction="#Signup_Pressed">
                <font>
                   <Font size="15.0" />
                </font>

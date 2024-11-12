@@ -17,7 +17,10 @@ public class User implements Serializable {
 
     //private Set<UserMark> UserMarks = new HashSet<>();
     public User (){};
-
+    public User(String login, String password) {
+        this.Login = login;
+        this.Password = password;
+    }
     public User(int id,String name,String login,String password, String role,Client personData){
         Id=id;
         Login=login;

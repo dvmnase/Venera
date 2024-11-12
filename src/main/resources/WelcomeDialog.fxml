@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="250.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.WelcomeDialogController">
+   <children>
+      <ImageView fitHeight="110.0" fitWidth="115.0" layoutX="68.0" layoutY="20.0">
+         <image>
+            <Image url="@images/venera.png" />
+         </image>
+         <effect>
+            <DropShadow height="28.02" radius="70.255" width="255.0">
+               <color>
+                  <Color red="0.4239766001701355" green="0.6370955109596252" blue="0.9157894849777222" />
+               </color>
+            </DropShadow>
+         </effect>
+      </ImageView>
+      <Hyperlink layoutX="93.0" layoutY="81.0" text="продолжить" textFill="#404c5e" onAction="#closeDialog">
+         <font>
+            <Font name="Garamond" size="11.0" />
+         </font>
+      </Hyperlink>
+      <Text fill="#0c1b71" layoutX="39.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ДОБРО ПОЖАЛОВАТЬ">
+         <font>
+            <Font name="Garamond" size="16.0" />
+         </font>
+      </Text>
+   </children>
+</Pane>
