@@ -50,20 +50,24 @@ public class Login {
 
         Response response = loginService.login(request); // Используем сервис для авторизации
 
-        showAlert("Результат", response.getMessage());
+
 
         // При успешной авторизации можно перейти на другой экран
-        if (response.getMessage().equals("Авторизация успешна!")) {
+        if ("SUCCESS".equals(response.getStatus())) {
             try {
                 Stage stage = (Stage) buttonLogin.getScene().getWindow();
-                Parent root = FXMLLoader.load(getClass().getResource("main.fxml")); // Замените на ваш файл
+                Parent root = FXMLLoader.load(getClass().getResource("Main.fxml")); // Замените на ваш файл
                 Scene newScene = new Scene(root);
                 stage.setScene(newScene);
             } catch (Exception e) {
                 e.printStackTrace();
+                ErrorDialogController.showErrorDialog("не удалось открыть главное окно");
             }
         }
-        
+        else {
+            ErrorDialogController.showErrorDialog("Неверные данные");
+        }
+
     }
 
     public void Register_Pressed(ActionEvent actionEvent) throws Exception {

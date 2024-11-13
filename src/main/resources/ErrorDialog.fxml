@@ -5,10 +5,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.control.Label?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.ErrorDialogController" stylesheets="@ErrorDialogStyle.css">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="230.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.ErrorDialogController" stylesheets="@ErrorDialogStyle.css">
 
    <Label fx:id="errorMessage" text="Error message here" wrapText="true"
-          alignment="CENTER" style="-fx-font-weight: bold; -fx-font-size: 14px;"
+          alignment="CENTER" style=" -fx-font-size: 14px;"
           textAlignment="CENTER" prefWidth="200" />
 
    <ImageView fitHeight="54.0" fitWidth="70.0" layoutX="130.0" layoutY="39.0">

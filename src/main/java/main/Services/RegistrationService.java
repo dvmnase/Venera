@@ -1,6 +1,7 @@
 package main.Services;
 
 import com.google.gson.Gson;
+import javafx.stage.Stage;
 import main.Controllers.ErrorDialogController;
 import main.Controllers.WelcomeDialogController;
 import main.Models.TCP.Request;
@@ -16,7 +17,7 @@ import javafx.scene.control.Alert;
 
 public class RegistrationService {
 
-    public void registerUser(User user) {
+    public void registerUser(User user, Stage registerStage) {
         Gson gson = new Gson();
 
         // Создание объекта запроса
@@ -34,7 +35,7 @@ public class RegistrationService {
             String responseJson = in.readLine();
             if (responseJson != null) {
                 Response response = gson.fromJson(responseJson, Response.class);
-                handleServerResponse(response);
+                handleServerResponse(response, registerStage);
             }
         } catch (IOException e) {
             ErrorDialogController.showErrorDialog("Нет подключения к серверу");
@@ -43,9 +44,9 @@ public class RegistrationService {
     }
 
     // Метод для обработки ответа от сервера
-    private void handleServerResponse(Response response) {
+    private void handleServerResponse(Response response, Stage registerStage) {
         if ("SUCCESS".equals(response.getStatus())) {
-            WelcomeDialogController.showWelcomeDialog();
+            WelcomeDialogController.showWelcomeDialog(registerStage);
            // Platform.runLater(() -> showAlert("Регистрация", "Регистрация прошла успешно: " + response.getMessage()));
         } else {
             ErrorDialogController.showErrorDialog("Ошибка: " + response.getMessage());

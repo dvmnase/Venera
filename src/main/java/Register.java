@@ -84,9 +84,12 @@ public class Register {
 
         user.setPersonData(personData);
 
+        //получили Stage окна регистрации чтобы потом иметь доступ и закрыть
+        Stage registerStage = (Stage) buttonRegister.getScene().getWindow();
+
         // Используем сервис регистрации для отправки данных
         RegistrationService registrationService = new RegistrationService();
-        registrationService.registerUser(user);
+        registrationService.registerUser(user, registerStage);
     }
 
 

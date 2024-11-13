@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="250.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.WelcomeDialogController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="250.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.WelcomeDialogController" >
    <children>
       <ImageView fitHeight="110.0" fitWidth="115.0" layoutX="68.0" layoutY="20.0">
          <image>
@@ -24,7 +24,7 @@
             </DropShadow>
          </effect>
       </ImageView>
-      <Hyperlink layoutX="93.0" layoutY="81.0" text="продолжить" textFill="#404c5e" onAction="#closeDialog">
+      <Hyperlink fx:id="WelcomeHyperlink" layoutX="93.0" layoutY="81.0" text="продолжить" textFill="#404c5e" onAction="#closeDialog">
          <font>
             <Font name="Garamond" size="11.0" />
          </font>
