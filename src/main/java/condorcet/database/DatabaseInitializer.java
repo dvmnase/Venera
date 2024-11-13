@@ -19,7 +19,7 @@ public class DatabaseInitializer {
                     "id INT AUTO_INCREMENT PRIMARY KEY, " +
                     "login VARCHAR(50) NOT NULL, " +
                     "password VARCHAR(50) NOT NULL, " +
-                    "role ENUM('CLIENT', 'EMPLOYEE') NOT NULL" +
+                    "role ENUM('CLIENT', 'EMPLOYEE', 'ADMIN') NOT NULL" +
                     ");";
 
             String createClientTable = "CREATE TABLE IF NOT EXISTS clients (" +

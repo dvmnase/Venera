@@ -1,6 +1,9 @@
 package condorcet.Utility;
 
 import com.google.gson.Gson;
+import condorcet.DataAccessObjects.ProcedureDAO;
+import condorcet.Models.Entities.Procedure;
+import main.Enums.RequestType;
 import condorcet.Models.Entities.User;
 import condorcet.Models.Entities.Client;
 import condorcet.Models.TCP.Request;
@@ -17,6 +20,8 @@ import java.net.Socket;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
+
 
 public class ClientThread implements Runnable {
 
@@ -49,6 +54,8 @@ public class ClientThread implements Runnable {
 
                     request = gson.fromJson(message, Request.class);
 
+
+
                     switch (request.getRequestType()) {
                         case REGISTER: {
                             User user = gson.fromJson(request.getRequestMessage(), User.class);
@@ -66,21 +73,21 @@ public class ClientThread implements Runnable {
                                 } else if (userValidation.isPhoneExists(client.getPhone())) {
                                     response.setStatus("ERROR");
                                     response.setMessage("Номер телефона уже привязан к существующему аккаунту.");
-                                } else{
-                                // Сохранение пользователя и получение его ID
-                                int userId = userDAO.saveUser(user);
+                                } else {
+                                    // Сохранение пользователя и получение его ID
+                                    int userId = userDAO.saveUser(user);
 
-                                // Сохранение клиента с использованием полученного user_id
-                                clientDAO.saveClient(client, userId);
+                                    // Сохранение клиента с использованием полученного user_id
+                                    clientDAO.saveClient(client, userId);
 
-                                // Выводим сообщение о регистрации на сервере
-                                System.out.println("Зарегистрирован новый пользователь: " + user.getLogin());
+                                    // Выводим сообщение о регистрации на сервере
+                                    System.out.println("Зарегистрирован новый пользователь: " + user.getLogin());
 
-                                // Send success response with a detailed message
-                                response.setStatus("SUCCESS");
-                                response.setMessage("Registration successful for user: " + user.getLogin());
-                                    }
-                            }catch (SQLException e) {
+                                    // Send success response with a detailed message
+                                    response.setStatus("SUCCESS");
+                                    response.setMessage("Registration successful for user: " + user.getLogin());
+                                }
+                            } catch (SQLException e) {
                                 System.out.println("Database error during registration: " + e.getMessage());
                                 response.setStatus("ERROR");
                                 response.setMessage("Registration failed: " + e.getMessage());
@@ -102,22 +109,84 @@ public class ClientThread implements Runnable {
                             try {
                                 // Проверяем, существует ли пользователь с данным логином и паролем
                                 if (userDAO.isValidLogin(login, password)) {
+                                    String role = userDAO.getUserRole(login);
                                     response.setStatus("SUCCESS");
-                                    response.setMessage("Login successful for user: " + login);
+                                    response.setMessage("Авторизация успешна");
+                                    response.setRole(role);
                                 } else {
                                     response.setStatus("ERROR");
-                                    response.setMessage("Invalid login or password.");
+                                    response.setMessage("Неверный логин или пароль");
                                 }
                             } catch (SQLException e) {
                                 System.out.println("Database error during login: " + e.getMessage());
                                 response.setStatus("ERROR");
-                                response.setMessage("Login failed: " + e.getMessage());
+                                response.setMessage("Ошибка при авторизации: " + e.getMessage());
                             }
 
                             // Отправка ответа клиенту
                             out.println(gson.toJson(response));
                             break;
                         }
+
+                        case ADD_PROCEDURE: {
+                            Procedure procedure = gson.fromJson(request.getRequestMessage(), Procedure.class);
+
+
+                            ProcedureDAO procedureDAO = new ProcedureDAO(connection);
+
+
+
+                            try {
+                                procedureDAO.saveProcedure(procedure);
+
+
+
+                                    // Выводим сообщение о регистрации на сервере
+                                    System.out.println("Добавлена новая услуга: " + procedure.getTitle());
+
+                                    // Send success response with a detailed message
+                                    response.setStatus("SUCCESS");
+                                    response.setMessage("Add a new procedure: " + procedure.getTitle());
+                                }
+                            catch (SQLException e)
+                            {
+                                System.out.println("Database error during add procedure: " + e.getMessage());
+                                response.setStatus("ERROR");
+                                response.setMessage("Add procedure failed: " + e.getMessage());
+                            }
+                            // Отправка ответа клиенту
+                            out.println(gson.toJson(response));
+                            break;
+                        }
+
+                        case READ_PROCEDURES: {
+                            ProcedureDAO procedureDAO = new ProcedureDAO(connection);
+                            List<Procedure> procedures = procedureDAO.getAllProcedures(); // Метод для получения всех процедур
+
+                            response.setStatus("SUCCESS");
+                            response.setMessage(gson.toJson(procedures)); // Отправляем список процедур в формате JSON
+                            out.println(gson.toJson(response));
+                            break;
+                        }
+
+                        case DELETE_PROCEDURE: {
+                            int procedureId = Integer.parseInt(request.getRequestMessage());
+                            ProcedureDAO procedureDAO = new ProcedureDAO(connection);
+
+                            try {
+                                procedureDAO.deleteProcedure(procedureId); // Метод, который удаляет процедуру по ID
+                                response.setStatus("SUCCESS");
+                                response.setMessage("Процедура успешно удалена.");
+                            } catch (SQLException e) {
+                                response.setStatus("ERROR");
+                                response.setMessage("Ошибка при удалении процедуры: " + e.getMessage());
+                            }
+
+                            out.println(gson.toJson(response));
+                            break;
+                        }
+
+
                     }
                 } catch (IOException e) {
                     System.out.println("Error reading client message: " + e.getMessage());
