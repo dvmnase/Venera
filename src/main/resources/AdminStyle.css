@@ -1,0 +1,10 @@
+.button {
+    -fx-background-color: #0A1172AB; /* Цвет фона кнопки */
+    -fx-text-fill: white; /* Цвет текста */
+    -fx-font-family: "Garamond"; /* Шрифт */
+    -fx-font-size: 22px; /* Размер шрифта */
+}
+
+.button:hover {
+    -fx-background-color: #0A1172FF; /* Цвет фона при наведении */
+}

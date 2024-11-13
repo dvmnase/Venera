@@ -70,7 +70,7 @@
 
         <!-- Ячейки в сетке -->
         <children>
-            <Pane prefHeight="170.0" prefWidth="245.0" style="-fx-background-color: #0A1172;" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="cell-hover" >
+            <Pane prefHeight="170.0" prefWidth="245.0" style="-fx-background-color: #0a1172;" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="cell-hover" >
             <children>
                <ImageView fitHeight="170.0" fitWidth="268.0" layoutX="-15.0" opacity="0.78" styleClass="image-hover">
                   <image>

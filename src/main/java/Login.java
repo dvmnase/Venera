@@ -54,9 +54,19 @@ public class Login {
 
         // При успешной авторизации можно перейти на другой экран
         if ("SUCCESS".equals(response.getStatus())) {
+            String role = response.getRole();
             try {
                 Stage stage = (Stage) buttonLogin.getScene().getWindow();
-                Parent root = FXMLLoader.load(getClass().getResource("Main.fxml")); // Замените на ваш файл
+                Parent root;
+                if ("CLIENT".equals(role)) {
+                    root = FXMLLoader.load(getClass().getResource("/Main.fxml"));
+                } else if ("ADMIN".equals(role)) {
+                    root = FXMLLoader.load(getClass().getResource("/Admin.fxml"));
+                } else if ("EMPLOYEE".equals(role)) {
+                    root = FXMLLoader.load(getClass().getResource("Employee.fxml"));
+                } else {
+                    throw new IllegalArgumentException("Unknown user role: " + role);
+                }
                 Scene newScene = new Scene(root);
                 stage.setScene(newScene);
             } catch (Exception e) {
@@ -77,11 +87,5 @@ public class Login {
         stage.setScene(newScene);
     }
 
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+
 }
