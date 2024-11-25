@@ -8,6 +8,7 @@ public class Procedure {
     private Integer duration;
     private Float price;
 
+    private String service_type;
     public Procedure(){};
 
 
@@ -49,5 +50,13 @@ public class Procedure {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getService_type() {
+        return service_type;
+    }
+
+    public void setService_type(String service_type) {
+        this.service_type = service_type;
     }
 }

@@ -2,6 +2,7 @@ package main.Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -30,6 +31,8 @@ public class Admin_AddProcedure {
     private TextField textFieldPrice;
     @FXML
     private TextField textFieldTime;
+    @FXML
+    private ChoiceBox<String> choiceBoxService;
 
     public void Exit_Pressed(ActionEvent actionEvent) throws Exception {
         Stage stage = (Stage) ButtonExit.getScene().getWindow();
@@ -44,6 +47,7 @@ public class Admin_AddProcedure {
         String description = textAreaDescription.getText().trim();
         Integer duration = Integer.parseInt(textFieldTime.getText().trim());
         Float price = Float.parseFloat(textFieldPrice.getText().trim());
+        String service_type = choiceBoxService.getTypeSelector();
 
         if (title.isEmpty() || description.isEmpty() || duration<=0 || price<=0) {
             ErrorDialogController.showErrorDialog("Все поля должны быть корректно заполнены");
@@ -58,6 +62,7 @@ public class Admin_AddProcedure {
         procedure.setDescription(description);
         procedure.setDuration(duration);
         procedure.setPrice(price);
+        procedure.setService_type(service_type);
 
 
         AddProcedure_Service addProcedureService = new AddProcedure_Service();

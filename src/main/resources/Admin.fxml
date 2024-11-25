@@ -2,12 +2,13 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" fx:controller="main.Controllers.AdminController" prefWidth="800.0" style="-fx-background-color: #BBD4FC94;" stylesheets="@AdminStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #BBD4FC94;" stylesheets="@AdminStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.AdminController">
    <children>
-      <Button fx:id="ButtonAddProcedure" onAction="#AddProcedure_Pressed" layoutX="275.0" layoutY="120.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="250.0" styleClass="button" text="добавить услугу" textFill="WHITE"/>
-      <Button fx:id="ButtonDeleteProcedure" onAction="#DeleteProcedure_Pressed" layoutX="275.0" layoutY="184.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="250.0" styleClass="button" text="удалить услугу" textFill="WHITE"/>
-      <Button fx:id="ButtonEditProcedure" onAction="#EditProcedure_Pressed"  layoutX="275.0" layoutY="243.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="250.0" styleClass="button" text="редактировать услугу" textFill="WHITE"/>
+      <Button fx:id="ButtonAddProcedure" layoutX="275.0" layoutY="120.0" mnemonicParsing="false" onAction="#AddProcedure_Pressed" prefHeight="41.0" prefWidth="250.0" styleClass="button" text="добавить услугу" textFill="WHITE" />
+      <Button fx:id="ButtonDeleteProcedure" layoutX="275.0" layoutY="184.0" mnemonicParsing="false" onAction="#DeleteProcedure_Pressed" prefHeight="41.0" prefWidth="250.0" styleClass="button" text="удалить услугу" textFill="WHITE" />
+      <Button fx:id="ButtonEditProcedure" layoutX="275.0" layoutY="243.0" mnemonicParsing="false" onAction="#EditProcedure_Pressed" prefHeight="41.0" prefWidth="250.0" styleClass="button" text="редактировать услугу" textFill="WHITE" />
+      <Button fx:id="ButtonAddEmployee" layoutX="276.0" layoutY="301.0" mnemonicParsing="false" onAction="#AddEmployee_Pressed" prefHeight="41.0" prefWidth="250.0" styleClass="button" text="добавить сотрудника" textFill="WHITE" />
+      <Button fx:id="ButtonConnectionProcedureEmployee" layoutX="276.0" layoutY="361.0" mnemonicParsing="false" onAction="#ConnectionProcedureEmployee_Pressed" prefHeight="41.0" prefWidth="250.0" styleClass="button" text="назначить услугу " textFill="WHITE" />
    </children>
 </AnchorPane>

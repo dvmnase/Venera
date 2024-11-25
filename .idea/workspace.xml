@@ -5,20 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51115992-0421-4f6f-aa51-f1da2554b53e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/Controllers/AdminController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/Controllers/Admin_AddProcedure.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/Controllers/DeleteProcedure_Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/Controllers/ViewingProceduresController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/Models/Entities/Procedure.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/Services/AddProcedure_Service.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/Services/ViewingProcedures_Service.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/AdminStyle.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ViewingProcedures.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/Controllers/AddEmployeeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/Controllers/ConnectionProcedureEmployee_Controller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/Controllers/EditProcedureController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/Controllers/ProcedureSelectionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/Controllers/ServiceSelection_Controller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/Models/Entities/Employee.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/Services/AddEmployee_Service.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/Services/ConnectionProcedureEmployee_Service.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/Services/ProcedureConnectionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/Services/ProcedureService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ConnectionProcedureEmployee.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ServiceSelection.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/Controllers/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Controllers/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/Controllers/Admin_AddProcedure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Controllers/Admin_AddProcedure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/Controllers/ViewingProceduresController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Controllers/ViewingProceduresController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/Enums/RequestType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Enums/RequestType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/Models/TCP/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Models/TCP/Response.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/Models/Entities/Procedure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Models/Entities/Procedure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/Models/Entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Models/Entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AddProcedure.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AddProcedure.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Admin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Admin.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +69,7 @@
     &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/celjd/курсач 5 сем/прога/client&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
@@ -134,6 +143,11 @@
       <workItem from="1731437629101" duration="7910000" />
       <workItem from="1731487399168" duration="6884000" />
       <workItem from="1731509915943" duration="18744000" />
+      <workItem from="1731597643892" duration="12841000" />
+      <workItem from="1731679762284" duration="701000" />
+      <workItem from="1732298982319" duration="1437000" />
+      <workItem from="1732353330585" duration="15100000" />
+      <workItem from="1732555147128" duration="532000" />
     </task>
     <servers />
   </component>

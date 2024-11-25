@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.ServiceSelection_Controller">
+    <children>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+            <children>
+                <ListView fx:id="servicesListView" prefHeight="200" />
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <children>
+                        <Button text="OK"  onAction="#onOkPressed" />
+                        <Button text="Cancel" onAction="#onCancelPressed" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

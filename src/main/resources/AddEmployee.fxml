@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #BBD4FC94;" stylesheets="@AdminStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.AddEmployeeController">
+   <children>
+
+      <ImageView layoutX="237.0" layoutY="14.0">
+         <image>
+            <Image url="@images/logo.png" />
+         </image>
+      </ImageView>
+
+      <TextField fx:id="textFieldSurname" layoutX="111.0" layoutY="169.0" prefHeight="26.0" prefWidth="173.0" promptText="Фамилия" />
+      <TextField fx:id="textFieldPhone" layoutX="110.0" layoutY="213.0" prefHeight="26.0" prefWidth="174.0" promptText="номер телефона" />
+
+
+      <Button fx:id="ButtonAdd" layoutX="111.0" layoutY="472.0" mnemonicParsing="false" onAction="#Add_Pressed" prefHeight="42.0" prefWidth="378.0" styleClass="button" text="добавить услугу" textFill="WHITE" />
+      <Button fx:id="ButtonExit" layoutX="110.0" layoutY="523.0" mnemonicParsing="false" onAction="#Exit_Pressed" prefHeight="18.0" prefWidth="378.0" styleClass="button" text="вернуться назад" textFill="WHITE" />
+      <TextField fx:id="textFieldName" layoutX="314.0" layoutY="169.0" prefHeight="26.0" prefWidth="174.0" promptText="Имя" />
+      <TextField fx:id="textFieldSpecialization" layoutX="314.0" layoutY="213.0" prefHeight="26.0" prefWidth="174.0" promptText="Специализация" />
+      <TextArea fx:id="textAreaShared_data" layoutX="111.0" layoutY="256.0" prefHeight="114.0" prefWidth="378.0" promptText="Дополнительные сведения..." />
+      <RadioButton fx:id="cbFemale" layoutX="111.0" layoutY="382.0" mnemonicParsing="false" text="женщина" />
+      <RadioButton fx:id="cbMale" layoutX="201.0" layoutY="382.0" mnemonicParsing="false" text="мужчина" />
+      <TextField fx:id="textFieldLogin" layoutX="114.0" layoutY="417.0" prefHeight="26.0" prefWidth="173.0" promptText="логин" />
+      <PasswordField fx:id="textFieldPassword" layoutX="299.0" layoutY="417.0" prefHeight="26.0" prefWidth="190.0" promptText="пароль" />
+
+
+   </children>
+</AnchorPane>

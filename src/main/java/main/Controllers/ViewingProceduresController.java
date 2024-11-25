@@ -8,11 +8,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import main.Enums.RequestType;
 import main.Services.ViewingProcedures_Service;
 import main.Models.Entities.Procedure;
 
@@ -26,8 +28,11 @@ public class ViewingProceduresController {
     @FXML
     private Hyperlink HyperLinkExit;
 
+    private String type ;
+
+
     public void initialize() {
-        fetchAndDisplayProcedures();
+       // fetchAndDisplayProcedures();
     }
 
     public void Exit_Pressed(ActionEvent actionEvent) throws Exception {
@@ -68,8 +73,18 @@ public class ViewingProceduresController {
         textContainer.getChildren().addAll(titleLabel, descriptionLabel, durationLabel);
         cell.getChildren().add(textContainer);
 
-        // Добавляем обработчик клика для удаления
-        cell.setOnMouseClicked(event -> showDeleteConfirmation(procedure.getId()));
+        // Добавляем обработчик клика в зависимости от типа реакции
+        switch (type) {
+            case "DELETE":
+                cell.setOnMouseClicked(event -> showDeleteConfirmation(procedure.getId()));
+                break;
+            case "EDIT":
+                cell.setOnMouseClicked(event -> showEditProcedure(procedure.getId()));
+                break;
+            default:
+                // Ничего не делаем, это режим просмотра
+                break;
+        }
 
         cell.setOnMouseEntered(event -> cell.setStyle("-fx-background-color: #002033; -fx-padding: 10; -fx-border-radius: 5; -fx-background-radius: 5;"));
         cell.setOnMouseExited(event -> cell.setStyle("-fx-background-color: #003366; -fx-padding: 10; -fx-border-radius: 5; -fx-background-radius: 5;"));
@@ -84,7 +99,6 @@ public class ViewingProceduresController {
     }
 
     private void showDeleteConfirmation(int procedureId) {
-        // Создание нового диалогового окна
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.setTitle("Подтверждение удаления");
@@ -131,5 +145,97 @@ public class ViewingProceduresController {
         Scene dialogScene = new Scene(dialogVbox, 300, 150);
         dialog.setScene(dialogScene);
         dialog.show();
+    }
+
+    private void showEditProcedure(int procedureId) {
+        Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.setTitle("Редактирование процедуры");
+
+        VBox dialogVbox = new VBox(15);
+        dialogVbox.setStyle("-fx-padding: 20; -fx-background-color: #f0f0f0; -fx-background-radius: 10;");
+
+        Label messageLabel = new Label("Что хотите изменить?");
+        messageLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #003366;");
+
+        HBox buttonContainer = new HBox(10);
+
+        Button descriptionButton = new Button("Описание");
+        Button priceButton = new Button("Цена");
+        Button durationButton = new Button("Длительность");
+
+        descriptionButton.setStyle("-fx-background-color: #969898; -fx-text-fill: #000000;");
+        priceButton.setStyle("-fx-background-color: #969898; -fx-text-fill: #000000;");
+        durationButton.setStyle("-fx-background-color: #969898; -fx-text-fill: #000000;");
+
+        descriptionButton.setOnMouseEntered(event -> descriptionButton.setStyle("-fx-background-color: #c2d3e5;"));
+        descriptionButton.setOnMouseExited(event -> descriptionButton.setStyle("-fx-background-color: #969898;"));
+        priceButton.setOnMouseEntered(event -> priceButton.setStyle("-fx-background-color: #c2d3e5;"));
+        priceButton.setOnMouseExited(event -> priceButton.setStyle("-fx-background-color: #969898;"));
+        durationButton.setOnMouseEntered(event -> durationButton.setStyle("-fx-background-color: #c2d3e5;"));
+        durationButton.setOnMouseExited(event -> durationButton.setStyle("-fx-background-color: #969898;"));
+
+        descriptionButton.setOnAction(event -> {
+            dialog.close();
+            showInputDialog(procedureId, RequestType.EDIT_DESCRIPTION);
+        });
+
+        priceButton.setOnAction(event -> {
+            dialog.close();
+            showInputDialog(procedureId, RequestType.EDIT_PRICE);
+        });
+
+        durationButton.setOnAction(event -> {
+            dialog.close();
+            showInputDialog(procedureId, RequestType.EDIT_DURATION);
+        });
+
+        buttonContainer.getChildren().addAll(descriptionButton, priceButton, durationButton);
+        dialogVbox.getChildren().addAll(messageLabel, buttonContainer);
+
+        Scene dialogScene = new Scene(dialogVbox, 300, 150);
+        dialog.setScene(dialogScene);
+        dialog.show();
+    }
+
+    private void showInputDialog(int procedureId, RequestType requestType) {
+        Stage inputDialog = new Stage();
+        inputDialog.initModality(Modality.APPLICATION_MODAL);
+        inputDialog.setTitle("Введите новое значение");
+
+        VBox vbox = new VBox(10);
+        vbox.setStyle("-fx-padding: 20; -fx-background-color: #f0f0f0; -fx-background-radius: 10;");
+
+        Label label = new Label("Введите новое значение:");
+        label.setStyle("-fx-font-size: 14px;");
+
+        TextField inputField = new TextField();
+        Button confirmButton = new Button("Подтвердить");
+        confirmButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;");
+
+        confirmButton.setOnAction(event -> {
+            String newData = inputField.getText();
+            if (!newData.isEmpty()) {
+                EditProcedureController service = new EditProcedureController();
+                service.EditProcedure(procedureId, requestType, newData);
+                inputDialog.close();
+            } else {
+                ErrorDialogController.showErrorDialog("Пожалуйста, введите значение.");
+            }
+        });
+
+        vbox.getChildren().addAll(label, inputField, confirmButton);
+        Scene scene = new Scene(vbox, 300, 150);
+        inputDialog.setScene(scene);
+        inputDialog.show();
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+        fetchAndDisplayProcedures();
     }
 }
