@@ -33,7 +33,7 @@ public class ProcedureDAO {
 
     public List<Procedure> getAllProcedures() throws SQLException {
         List<Procedure> procedures = new ArrayList<>();
-        String query = "SELECT id, title, description, duration, price FROM procedures";
+        String query = "SELECT id, title, description, duration, price, service_type FROM procedures";
         try (PreparedStatement stmt = connection.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
@@ -43,6 +43,7 @@ public class ProcedureDAO {
                 procedure.setDescription(rs.getString("description"));
                 procedure.setDuration(rs.getInt("duration"));
                 procedure.setPrice(rs.getFloat("price"));
+                procedure.setService_type(rs.getString("service_type"));
                 procedures.add(procedure);
             }
         }
@@ -56,6 +57,64 @@ public class ProcedureDAO {
             stmt.executeUpdate();
         }
     }
+
+    public void updateProcedureDescription(int procedureId, String newDescription) throws SQLException {
+        String query = "UPDATE procedures SET description = ? WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, newDescription);
+            stmt.setInt(2, procedureId);
+            stmt.executeUpdate();
+        }
+    }
+
+    public void updateProcedurePrice(int procedureId, float newPrice) throws SQLException {
+        String query = "UPDATE procedures SET price = ? WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setFloat(1, newPrice);
+            stmt.setInt(2, procedureId);
+            stmt.executeUpdate();
+        }
+    }
+
+    public void updateProcedureDuration(int procedureId, int newDuration) throws SQLException {
+        String query = "UPDATE procedures SET duration = ? WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, newDuration);
+            stmt.setInt(2, procedureId);
+            stmt.executeUpdate();
+        }
+    }
+
+    public List<Procedure> getUnassignedProcedures(int employeeId) throws SQLException {
+        List<Procedure> procedures = new ArrayList<>();
+        String query = """
+        SELECT p.id, p.title, p.description, p.duration, p.price, p.service_type
+        FROM procedures p
+        WHERE NOT EXISTS (
+            SELECT 1
+            FROM employee_procedures ep
+            WHERE ep.procedure_id = p.id AND ep.employee_id = ?
+        )
+    """;
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, employeeId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Procedure procedure = new Procedure();
+                    procedure.setId(rs.getInt("id"));
+                    procedure.setTitle(rs.getString("title"));
+                    procedure.setDescription(rs.getString("description"));
+                    procedure.setDuration(rs.getInt("duration"));
+                    procedure.setPrice(rs.getFloat("price"));
+                    procedure.setService_type(rs.getString("service_type"));
+                    procedures.add(procedure);
+                }
+            }
+        }
+        return procedures;
+    }
+
 }
 
 

@@ -13,7 +13,7 @@ public class User implements Serializable {
 
 
     private Client personData;
-
+    private Employee employeeData;
 
     //private Set<UserMark> UserMarks = new HashSet<>();
     public User (){};
@@ -67,4 +67,11 @@ public class User implements Serializable {
     }
 
 
+    public Employee getEmployeeData() {
+        return employeeData;
+    }
+
+    public void setEmployeeData(Employee employeeData) {
+        this.employeeData = employeeData;
+    }
 }
