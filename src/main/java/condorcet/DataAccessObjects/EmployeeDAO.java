@@ -78,4 +78,34 @@ public class EmployeeDAO {
         }
         return procedures;
     }
+
+
+    public List<Employee> getEmployeesByProcedureId(int procedureId) throws SQLException {
+        String sql = "SELECT e.id, e.name, e.surname, e.specialization, e.shared_data, e.phone, e.sex " +
+                "FROM employees e " +
+                "JOIN employee_procedures ep ON e.id = ep.employee_id " +
+                "WHERE ep.procedure_id = ?";
+        List<Employee> employees = new ArrayList<>();
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, procedureId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Employee employee = new Employee();
+                    employee.setId(rs.getInt("id"));
+                    employee.setName(rs.getString("name"));
+                    employee.setSurname(rs.getString("surname"));
+                    employee.setSpecialization(rs.getString("specialization"));
+                    employee.setShared_data(rs.getString("shared_data"));
+                    employee.setPhone(rs.getString("phone"));
+                    employee.setSex(rs.getString("sex"));
+
+                    employees.add(employee);
+                }
+            }
+        }
+
+        return employees;
+    }
+
 }

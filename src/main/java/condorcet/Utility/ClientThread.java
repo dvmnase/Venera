@@ -1,14 +1,12 @@
 package condorcet.Utility;
 
 import com.google.gson.Gson;
-import condorcet.DataAccessObjects.EmployeeDAO;
-import condorcet.DataAccessObjects.ProcedureDAO;
+import condorcet.DataAccessObjects.*;
 import condorcet.Models.Entities.*;
+import condorcet.Utils.GsonProvider;
 import main.Enums.RequestType;
 import condorcet.Models.TCP.Request;
 import condorcet.Models.TCP.Response;
-import condorcet.DataAccessObjects.UserDAO;
-import condorcet.DataAccessObjects.ClientDAO;
 import condorcet.Validation.UserValidation;
 
 import java.io.BufferedReader;
@@ -109,10 +107,16 @@ public class ClientThread implements Runnable {
                             try {
                                 // Проверяем, существует ли пользователь с данным логином и паролем
                                 if (userDAO.isValidLogin(login, password)) {
+                                    // Получаем роль и ID пользователя
                                     String role = userDAO.getUserRole(login);
+                                    int userId = userDAO.getUserId(login); // Получаем ID пользователя
+
+                                    // Устанавливаем статус успешной авторизации и отправляем роль и ID
                                     response.setStatus("SUCCESS");
                                     response.setMessage("Авторизация успешна");
                                     response.setRole(role);
+                                    response.setUserId(userId); // Отправляем ID пользователя
+
                                 } else {
                                     response.setStatus("ERROR");
                                     response.setMessage("Неверный логин или пароль");
@@ -122,7 +126,6 @@ public class ClientThread implements Runnable {
                                 response.setStatus("ERROR");
                                 response.setMessage("Ошибка при авторизации: " + e.getMessage());
                             }
-
                             // Отправка ответа клиенту
                             out.println(gson.toJson(response));
                             break;
@@ -308,8 +311,103 @@ public class ClientThread implements Runnable {
                             break;
                         }
 
+                        case GET_PROCEDURES_FOR_TYPE: {
+                            String procedureType = request.getRequestMessage(); // Получаем тип процедуры из запроса
+                            ProcedureDAO procedureDAO = new ProcedureDAO(connection);
 
+                            try {
+                                // Получаем процедуры, соответствующие указанному типу
+                                List<Procedure> filteredProcedures = procedureDAO.getProceduresByType(procedureType);
 
+                                response.setStatus("SUCCESS");
+                                response.setMessage(gson.toJson(filteredProcedures)); // Отправляем список процедур в формате JSON
+                            } catch (SQLException e) {
+                                response.setStatus("ERROR");
+                                response.setMessage("Ошибка при получении процедур по типу: " + e.getMessage());
+                            }
+
+                            out.println(gson.toJson(response)); // Отправка ответа клиенту
+                            break;
+                        }
+
+                        case GET_EMPLOYEES_FOR_PROCEDURE: {
+                            int procedureId = Integer.parseInt(request.getRequestMessage());
+                            System.out.println("Request for employees for procedure ID: " + procedureId);
+
+                            EmployeeDAO employeeDAO = new EmployeeDAO(connection);
+                            try {
+                                List<Employee> employees = employeeDAO.getEmployeesByProcedureId(procedureId);
+                                System.out.println("Employees fetched: " + employees);
+
+                                response.setStatus("SUCCESS");
+                                response.setMessage(gson.toJson(employees));
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                                response.setStatus("ERROR");
+                                response.setMessage("Ошибка при получении сотрудников для процедуры: " + e.getMessage());
+                            }
+
+                            out.println(gson.toJson(response));
+                            break;
+                        }
+                        case ADD_APPOINTMENT: {
+                            Gson gson = GsonProvider.getGson();
+                            Appointment appointment = gson.fromJson(request.getRequestMessage(), Appointment.class);
+                            AppointmentDAO appointmentDAO = new AppointmentDAO(connection);
+                            Response response = new Response(); // Создаем новый объект ответа
+
+                            try {
+                                // Сохраняем запись о встрече и получаем ID
+                                int appointmentId = appointmentDAO.saveAppointment(appointment);
+
+                                // Устанавливаем ID в ответ
+                                response.setStatus("SUCCESS");
+                                response.setMessage(String.valueOf(appointmentId)); // Возвращаем ID как строку
+                                response.setAppointmentId(appointmentId);  // Сохраняем ID записи в ответе
+
+                                System.out.println("Новый ID записи: " + appointmentId);  // Выводим ID на консоль
+
+                            } catch (SQLException e) {
+                                // Обработка ошибки базы данных
+                                System.out.println("Database error during add appointment: " + e.getMessage());
+                                response.setStatus("ERROR");
+                                response.setMessage("Failed to add appointment: " + e.getMessage());
+                            }
+
+                            // Отправка ответа клиенту
+                            out.println(gson.toJson(response));
+                            break;
+                        }
+                        case ADD_PAYMENT: {
+                            // Используем кастомный Gson с адаптером
+                            Gson gson = GsonProvider.getGson();
+                            Payment payment = gson.fromJson(request.getRequestMessage(), Payment.class);
+                            PaymentDAO paymentDAO = new PaymentDAO(connection);
+
+                            try {
+                                // Сохраняем запись о встрече и получаем ID
+                                paymentDAO.savePayment(payment);
+                                System.out.println("Пришло "+payment.getAppointment_id());
+                              //  int appointmentId = appointmentDAO.saveAppointment(appointment);
+
+                                // Устанавливаем ID в ответ
+                                response.setStatus("SUCCESS");
+                                response.setMessage("Appointment added successfully.");
+                               // response.setAppointmentId(appointmentId);  // Добавляем ID записи в ответ
+
+                             //   System.out.println("Новый ID записи: " + appointmentId);  // Выводим ID на консоль
+
+                            } catch (SQLException e) {
+                                // Обработка ошибки базы данных
+                                System.out.println("Database error during add appointment: " + e.getMessage());
+                                response.setStatus("ERROR");
+                                response.setMessage("Failed to add appointment: " + e.getMessage());
+                            }
+
+                            // Отправка ответа клиенту
+                            out.println(gson.toJson(response));
+                            break;
+                        }
 
                     }
                 } catch (IOException e) {

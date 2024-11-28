@@ -115,6 +115,30 @@ public class ProcedureDAO {
         return procedures;
     }
 
+    public List<Procedure> getProceduresByType(String procedureType) throws SQLException {
+        List<Procedure> procedures = new ArrayList<>();
+        String sql = "SELECT * FROM procedures WHERE service_type = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, procedureType);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Procedure procedure = new Procedure();
+                    procedure.setId(rs.getInt("id"));
+                    procedure.setTitle(rs.getString("title"));
+                    procedure.setDescription(rs.getString("description"));
+                    procedure.setDuration(rs.getInt("duration"));
+                    procedure.setPrice(rs.getFloat("price"));
+                    procedure.setService_type(rs.getString("service_type"));
+
+                    procedures.add(procedure);
+                }
+            }
+        }
+
+        return procedures;
+    }
+
 }
 
 

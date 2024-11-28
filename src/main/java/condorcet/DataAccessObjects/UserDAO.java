@@ -9,7 +9,6 @@ import java.sql.SQLException;
 public class UserDAO {
     private Connection connection;
 
-
     public UserDAO(Connection connection) {
         this.connection = connection;
     }
@@ -57,5 +56,19 @@ public class UserDAO {
             }
         }
         return null; // Если роль не найдена
+    }
+
+    // Новый метод для получения ID пользователя по логину
+    public int getUserId(String login) throws SQLException {
+        String query = "SELECT id FROM users WHERE login = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, login);
+            try (ResultSet resultSet = stmt.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("id"); // Возвращаем ID пользователя
+                }
+            }
+        }
+        return -1; // Если ID не найден
     }
 }
