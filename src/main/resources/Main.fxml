@@ -18,9 +18,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #BBD4FC94;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" stylesheets ="@MainStyle.css">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #BBD4FC94;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" stylesheets ="@MainStyle.css" fx:controller="main.Controllers.ProcedureSelectionPressedClient_Controller">
     <!-- Верхняя панель -->
-    <HBox spacing="10" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10">
+    <HBox fx:id="proceduresContainer" spacing="10" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10">
       <ImageView fitHeight="43.0" fitWidth="43.0">
          <image>
             <Image url="@images/user.png" />
@@ -37,9 +37,8 @@
         <MenuButton prefHeight="32.0" prefWidth="42.0" style="-fx-background-color: B0B3B875;" text="">
             <!-- Пункты меню -->
             <items>
-                <MenuItem text="Настройки" />
-                <MenuItem text="Помощь" />
-                <MenuItem text="Выход" />
+                <MenuItem text="Записи" />
+                <MenuItem onAction="#ExitPressed" text="Выход" />
             </items>
          <graphic>
             <ImageView fitHeight="18.0" fitWidth="24.0">
@@ -70,9 +69,9 @@
 
         <!-- Ячейки в сетке -->
         <children>
-            <Pane prefHeight="170.0" prefWidth="245.0" style="-fx-background-color: #0a1172;" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="cell-hover" >
+            <Pane prefHeight="170.0" prefWidth="245.0" onMouseClicked="#handleMakeupClick" style="-fx-background-color: #0a1172;" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="cell-hover" >
             <children>
-               <ImageView fitHeight="170.0" fitWidth="268.0" layoutX="-15.0" opacity="0.78" styleClass="image-hover">
+               <ImageView fx:id="makeupIcon"  fitHeight="170.0" fitWidth="268.0" layoutX="-15.0" opacity="0.78" styleClass="image-hover">
                   <image>
                      <Image url="@images/makeup.png" />
                   </image>
@@ -93,9 +92,9 @@
                   </effect>
                </Text>
             </children></Pane>
-            <Pane style="-fx-background-color: #0A1172;" GridPane.columnIndex="1" styleClass="cell-hover">
+            <Pane style="-fx-background-color: #0A1172;" onMouseClicked="#handleEyebrowsClick" GridPane.columnIndex="1" styleClass="cell-hover">
             <children>
-               <ImageView fitHeight="170.5" fitWidth="280.0" layoutX="-26.0" opacity="0.78" styleClass="image-hover">
+               <ImageView fx:id="eyebrowsIcon"  fitHeight="170.5" fitWidth="280.0" layoutX="-26.0" opacity="0.78" styleClass="image-hover">
                   <image>
                      <Image url="@images/eyebrows.png" />
                   </image>
@@ -116,9 +115,9 @@
                   </effect>
                </Text>
             </children></Pane>
-            <Pane opacity="0.78" style="-fx-background-color: #0A1172;" GridPane.columnIndex="2" styleClass="cell-hover">
+            <Pane opacity="0.78" style="-fx-background-color: #0A1172;" onMouseClicked="#handleFacialCareClick" GridPane.columnIndex="2" styleClass="cell-hover">
             <children>
-               <ImageView fitHeight="171.0" fitWidth="252.0" opacity="0.89" styleClass="image-hover">
+               <ImageView fitHeight="171.0" fitWidth="252.0"  opacity="0.89" styleClass="image-hover">
                   <image>
                      <Image url="@images/Facial care.png" />
                   </image>
@@ -143,8 +142,7 @@
                <Blend mode="DIFFERENCE" opacity="0.3" />
             </effect>
          </Pane>
-
-                  <Pane style="-fx-background-color: #0A1172;" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="cell-hover">
+            <Pane style="-fx-background-color: #0A1172;" onMouseClicked="#handlePedicureClick" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="cell-hover">
             <children>
                <ImageView fitHeight="170.0" fitWidth="221.0" layoutX="33.0" opacity="0.86" styleClass="image-hover">
                   <image>
@@ -168,7 +166,7 @@
                </Text>
             </children>
          </Pane>
-            <Pane style="-fx-background-color: #0A1172;" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="cell-hover">
+            <Pane style="-fx-background-color: #0A1172;" onMouseClicked="#handleManicureClick"  GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="cell-hover">
             <children>
                <ImageView fitHeight="170.0" fitWidth="213.0" opacity="0.78" styleClass="image-hover">
                   <image>
@@ -192,7 +190,7 @@
                </Text>
             </children>
          </Pane>
-            <Pane style="-fx-background-color: #0A1172;" GridPane.columnIndex="2" GridPane.rowIndex="1" styleClass="cell-hover">
+            <Pane style="-fx-background-color: #0A1172;" onMouseClicked="#handleHaircutClick" GridPane.columnIndex="2" GridPane.rowIndex="1" styleClass="cell-hover">
             <children>
                <ImageView fitHeight="170.0" fitWidth="252.0" opacity="0.84" styleClass="image-hover">
                   <image>
@@ -217,7 +215,7 @@
             </children>
          </Pane>
 
-            <Pane style="-fx-background-color: #0A1172;" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="cell-hover">
+            <Pane style="-fx-background-color: #0A1172;" onMouseClicked="#handleColoringClick" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="cell-hover">
             <children>
                <ImageView fitHeight="170.5" fitWidth="291.0" layoutX="-1.0" opacity="0.83" styleClass="image-hover">
                   <image>
@@ -240,7 +238,7 @@
                   </effect>
                </Text>
             </children></Pane>
-            <Pane style="-fx-background-color: #0A1172;" GridPane.columnIndex="1" GridPane.rowIndex="2" styleClass="cell-hover">
+            <Pane style="-fx-background-color: #0A1172;" onMouseClicked="#handleLayingClick" GridPane.columnIndex="1" GridPane.rowIndex="2" styleClass="cell-hover">
             <children>
                <ImageView fitHeight="175.5" fitWidth="221.0" layoutX="33.0" layoutY="-4.0" opacity="0.8" styleClass="image-hover">
                   <image>
@@ -263,7 +261,7 @@
                   </effect>
                </Text>
             </children></Pane>
-            <Pane style="-fx-background-color: #0A1172;" GridPane.columnIndex="2" GridPane.rowIndex="2" styleClass="cell-hover">
+            <Pane style="-fx-background-color: #0A1172;" onMouseClicked="#handleHairCareClick" GridPane.columnIndex="2" GridPane.rowIndex="2" styleClass="cell-hover">
             <children>
                <ImageView fitHeight="171.0" fitWidth="252.0" opacity="0.78" styleClass="image-hover">
                   <image>

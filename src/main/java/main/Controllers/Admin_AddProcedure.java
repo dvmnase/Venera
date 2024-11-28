@@ -35,6 +35,7 @@ public class Admin_AddProcedure {
     private ChoiceBox<String> choiceBoxService;
 
     public void Exit_Pressed(ActionEvent actionEvent) throws Exception {
+
         Stage stage = (Stage) ButtonExit.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("/Admin.fxml"));
         Scene newScene = new Scene(root);

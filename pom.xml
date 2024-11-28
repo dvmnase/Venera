@@ -37,12 +37,17 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>23.0.1</version>
+            <version>${javafx.version}</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>23.0.1</version>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>${javafx.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -74,12 +79,12 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>main.Main</mainClass> <!-- Убедитесь, что путь к вашему основному классу правильный -->
+                    <mainClass>main.Main</mainClass>
                     <options>
                         <option>--module-path</option>
                         <option>C:\Users\celjd\javafx-sdk-17.0.1\lib</option> <!-- Укажите путь к JavaFX SDK -->
                         <option>--add-modules</option>
-                        <option>javafx.controls,javafx.fxml</option>
+                        <option>javafx.controls,javafx.fxml,javafx.graphics</option>
                     </options>
                 </configuration>
             </plugin>

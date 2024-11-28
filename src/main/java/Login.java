@@ -17,6 +17,7 @@ import main.Enums.RequestType;
 import main.Utility.ClientSocket;
 import main.Models.Entities.User;
 import main.Services.LoginService;
+import main.Utility.Session;
 
 public class Login {
 
@@ -54,7 +55,14 @@ public class Login {
 
         // При успешной авторизации можно перейти на другой экран
         if ("SUCCESS".equals(response.getStatus())) {
+            int userId = response.getUserId(); // Получаем ID из ответа
             String role = response.getRole();
+
+            // Сохраняем данные в сессии
+            Session session = Session.getInstance();
+            session.setUserId(userId);
+            session.setRole(role);
+
             try {
                 Stage stage = (Stage) buttonLogin.getScene().getWindow();
                 Parent root;
@@ -73,8 +81,7 @@ public class Login {
                 e.printStackTrace();
                 ErrorDialogController.showErrorDialog("не удалось открыть главное окно");
             }
-        }
-        else {
+        } else {
             ErrorDialogController.showErrorDialog("Неверные данные");
         }
 
