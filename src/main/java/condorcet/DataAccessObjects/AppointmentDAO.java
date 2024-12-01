@@ -40,6 +40,34 @@ public class AppointmentDAO {
         }
     }
 
+    public List<Appointment> getAppointmentsByClientId(int clientId) throws SQLException {
+        List<Appointment> appointments = new ArrayList<>();
+        String query = "SELECT id, client_id, employee_id, procedure_id, appointment_date, notes FROM appointments WHERE client_id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, clientId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Appointment appointment = new Appointment();
+                    appointment.setId(rs.getInt("id"));
+                    appointment.setClientId(rs.getInt("client_id"));
+                    appointment.setEmployeeId(rs.getInt("employee_id"));
+                    appointment.setProcedureId(rs.getInt("procedure_id"));
 
+                    // Конвертация Timestamp в LocalDateTime
+                    Timestamp timestamp = rs.getTimestamp("appointment_date");
+                    if (timestamp != null) {
+                        appointment.setAppointmentDate(timestamp.toLocalDateTime());
+                    } else {
+                        // Логирование или обработка случая, когда дата отсутствует
+                        System.out.println("Appointment ID " + appointment.getId() + " has no date.");
+                    }
 
+                    // Устанавливаем примечания (если они есть)
+                   // appointment.setNotes(rs.getString("notes")); // Убедитесь, что это не null
+                    appointments.add(appointment);
+                }
+            }
+        }
+        return appointments;
+    }
 }

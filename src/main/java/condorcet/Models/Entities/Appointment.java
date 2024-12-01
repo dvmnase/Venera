@@ -1,5 +1,7 @@
 package condorcet.Models.Entities;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.time.LocalDateTime;
 
 public class Appointment {
@@ -7,6 +9,7 @@ public class Appointment {
     private int clientId;
     private int employeeId;
     private int procedureId;
+    @SerializedName("appointment_date")
     private LocalDateTime appointmentDate;
     private String notes;
 

@@ -5,19 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a9318482-984f-49c7-bfa3-451f4d24fa90" name="Changes" comment="First commit: the connection between the server and the client">
-      <change afterPath="$PROJECT_DIR$/src/main/java/condorcet/DataAccessObjects/AppointmentDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/condorcet/DataAccessObjects/PaymentDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/condorcet/Models/Entities/Appointment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/condorcet/Models/Entities/Payment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/condorcet/Utils/GsonProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/condorcet/Utils/LocalDateTimeAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/DataAccessObjects/AppointmentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/DataAccessObjects/AppointmentDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/DataAccessObjects/EmployeeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/DataAccessObjects/EmployeeDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/DataAccessObjects/ProcedureDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/DataAccessObjects/ProcedureDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/DataAccessObjects/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/DataAccessObjects/UserDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/Enums/RequestType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/Enums/RequestType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/Models/TCP/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/Models/TCP/Response.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/Models/Entities/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/Models/Entities/Appointment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/Models/TCP/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/Models/TCP/Request.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/Utility/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/Utility/ClientThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/Utils/LocalDateTimeAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/Utils/LocalDateTimeAdapter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,21 +47,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/celjd/курсач 5 сем/прога/client&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;617e49878ce4bee1b2237c842bb9bfab&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/celjd/курсач 5 сем/прога/client",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "spring.configuration.checksum": "617e49878ce4bee1b2237c842bb9bfab",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -88,6 +84,9 @@
       <workItem from="1732556177225" duration="2135000" />
       <workItem from="1732619436070" duration="4983000" />
       <workItem from="1732812586675" duration="9985000" />
+      <workItem from="1732913627052" duration="701000" />
+      <workItem from="1732947492442" duration="5815000" />
+      <workItem from="1732998600178" duration="3211000" />
     </task>
     <servers />
   </component>
@@ -103,17 +102,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/condorcet/Utility/ClientThread.java</url>
-          <line>380</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/condorcet/Utility/ClientThread.java</url>
-          <line>382</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/condorcet/Utility/ClientThread.java</url>
-          <line>383</line>
+          <line>390</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>

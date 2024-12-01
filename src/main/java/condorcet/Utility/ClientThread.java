@@ -1,9 +1,11 @@
 package condorcet.Utility;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import condorcet.DataAccessObjects.*;
 import condorcet.Models.Entities.*;
 import condorcet.Utils.GsonProvider;
+import condorcet.Utils.LocalDateTimeAdapter;
 import main.Enums.RequestType;
 import condorcet.Models.TCP.Request;
 import condorcet.Models.TCP.Response;
@@ -18,7 +20,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class ClientThread implements Runnable {
@@ -406,6 +413,53 @@ public class ClientThread implements Runnable {
 
                             // Отправка ответа клиенту
                             out.println(gson.toJson(response));
+                            break;
+                        }
+
+                        case GET_APPOINTMENT_FOR_CLIENT: {
+                            try {
+                                int clientId = request.getClientId();
+                                AppointmentDAO appointmentDAO = new AppointmentDAO(connection);
+                                ProcedureDAO procedureDAO = new ProcedureDAO(connection);
+                                EmployeeDAO employeeDAO = new EmployeeDAO(connection);
+
+                                List<Appointment> appointments = appointmentDAO.getAppointmentsByClientId(clientId);
+                                List<Map<String, Object>> appointmentsData = new ArrayList<>();
+
+                                for (Appointment appointment : appointments) {
+                                    Procedure procedure = procedureDAO.getProcedureById(appointment.getProcedureId());
+                                    Employee employee = employeeDAO.getEmployeeById(appointment.getEmployeeId());
+
+                                    Map<String, Object> appointmentDetails = new HashMap<>();
+                                    appointmentDetails.put("appointment_id", appointment.getId());
+
+                                    // Не форматируем дату здесь, просто передаем объект
+                                    appointmentDetails.put("appointment_date", appointment.getAppointmentDate());
+                                    //System.out.println("Raw appointment date: " + appointment.getAppointmentDate());
+
+                                    appointmentDetails.put("notes", appointment.getNotes());
+                                    appointmentDetails.put("procedure", procedure);
+                                    appointmentDetails.put("employee", employee);
+
+                                    appointmentsData.add(appointmentDetails);
+
+                                }
+
+                                Gson gson = new GsonBuilder()
+                                        .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                                        .create();
+
+                                Response response = new Response();
+                                response.setStatus("SUCCESS");
+                                response.setMessage(gson.toJson(appointmentsData));
+                                out.println(gson.toJson(response));
+                            } catch (SQLException e) {
+                                System.out.println("Database error during GET_APPOINTMENT_FOR_CLIENT: " + e.getMessage());
+                                Response response = new Response();
+                                response.setStatus("ERROR");
+                                response.setMessage("Failed to fetch appointments: " + e.getMessage());
+                                out.println(gson.toJson(response));
+                            }
                             break;
                         }
 

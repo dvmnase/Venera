@@ -50,6 +50,26 @@ public class ProcedureDAO {
         return procedures;
     }
 
+    public Procedure getProcedureById(int procedureId) throws SQLException {
+        Procedure procedure = null;
+        String query = "SELECT id, title, description, duration, price, service_type FROM procedures WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, procedureId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    procedure = new Procedure();
+                    procedure.setId(rs.getInt("id"));
+                    procedure.setTitle(rs.getString("title"));
+                    procedure.setDescription(rs.getString("description"));
+                    procedure.setDuration(rs.getInt("duration"));
+                    procedure.setPrice(rs.getFloat("price"));
+                    procedure.setService_type(rs.getString("service_type"));
+                }
+            }
+        }
+        return procedure;
+    }
+    
     public void deleteProcedure(int procedureId) throws SQLException {
         String query = "DELETE FROM procedures WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {

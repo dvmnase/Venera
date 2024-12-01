@@ -56,6 +56,25 @@ public class EmployeeDAO {
         }
         return employees;
     }
+public Employee getEmployeeById(int employeeId) throws SQLException{
+        Employee employee =null;
+        String query ="SELECT id, name, surname, specialization, phone,sex FROM employees WHERE id=?";
+    try (PreparedStatement stmt = connection.prepareStatement(query)) {
+        stmt.setInt(1, employeeId);
+        try (ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                employee = new Employee();
+                employee.setId(rs.getInt("id"));
+                employee.setName(rs.getString("name"));
+                employee.setSurname(rs.getString("surname"));
+                employee.setSpecialization(rs.getString("specialization"));
+                employee.setPhone(rs.getString("phone"));
+                employee.setSex(rs.getString("sex"));
+            }
+        }
+    }
+    return employee;
+}
 
     public List<Procedure> getProceduresByEmployeeId(int employeeId) throws SQLException {
         List<Procedure> procedures = new ArrayList<>();
