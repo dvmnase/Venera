@@ -1,5 +1,7 @@
 package main.Models.Entities;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.time.LocalDateTime;
 
 public class Appointment {
@@ -7,8 +9,12 @@ public class Appointment {
     private int clientId;
     private int employeeId;
     private int procedureId;
+
+    @SerializedName("appointment_date")
     private LocalDateTime appointmentDate;
     private String notes;
+    private Procedure procedure; // Добавлено
+    private Employee employee;   // Добавлено
 
     public int getId() {
         return id;
@@ -56,5 +62,21 @@ public class Appointment {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public Procedure getProcedure() { // Добавлено
+        return procedure;
+    }
+
+    public void setProcedure(Procedure procedure) { // Добавлено
+        this.procedure = procedure;
+    }
+
+    public Employee getEmployee() { // Добавлено
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) { // Добавлено
+        this.employee = employee;
     }
 }

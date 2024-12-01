@@ -37,7 +37,7 @@
         <MenuButton prefHeight="32.0" prefWidth="42.0" style="-fx-background-color: B0B3B875;" text="">
             <!-- Пункты меню -->
             <items>
-                <MenuItem text="Записи" />
+                <MenuItem onAction="#AppoimentsPressed" text="Записи" />
                 <MenuItem onAction="#ExitPressed" text="Выход" />
             </items>
          <graphic>

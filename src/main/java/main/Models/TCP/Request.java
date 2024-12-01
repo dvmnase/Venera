@@ -5,10 +5,12 @@ import main.Enums.RequestType;
 public class Request {
     private RequestType requestType;
     private String requestMessage;
+    private int clientId; // Поле для хранения ID клиента
 
-    public Request(){};
-    public Request (RequestType requestType, String requestMessage )
-    {
+    public Request() {
+    }
+
+    public Request(RequestType requestType, String requestMessage) {
         this.setRequestType(requestType);
         this.setRequestMessage(requestMessage);
     }
@@ -27,5 +29,13 @@ public class Request {
 
     public void setRequestMessage(String requestMessage) {
         this.requestMessage = requestMessage;
+    }
+
+    public int getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
     }
 }

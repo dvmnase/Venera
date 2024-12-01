@@ -44,6 +44,20 @@ public class ProcedureSelectionPressedClient_Controller {
 
 
     @FXML
+    public void AppoimentsPressed(ActionEvent actionEvent) throws Exception{
+        //Session.getInstance().clear();
+
+        // Получаем текущее окно (Stage) через объект actionEvent
+        Stage stage = (Stage) proceduresContainer.getScene().getWindow();
+
+        // Загружаем экран логина
+        Parent root = FXMLLoader.load(getClass().getResource("/GetAppintments.fxml"));
+        Scene newScene = new Scene(root);
+        stage.setScene(newScene);
+        stage.show();
+    }
+
+    @FXML
     private void handleMakeupClick() {
         openProcedureListWindow("МАКИЯЖ");
     }
