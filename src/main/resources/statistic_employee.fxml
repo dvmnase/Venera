@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="main.Controllers.EmployeeStatisticsController">
+    <children>
+        <TableView fx:id="employeeTable" prefWidth="600" prefHeight="400">
+            <columns>
+                <TableColumn fx:id="nameColumn" text="Имя" />
+                <TableColumn fx:id="surnameColumn" text="Фамилия" />
+                <TableColumn fx:id="percentageColumn" text="Процент" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>
