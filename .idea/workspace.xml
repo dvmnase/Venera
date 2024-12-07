@@ -7,13 +7,14 @@
     <list default="true" id="a9318482-984f-49c7-bfa3-451f4d24fa90" name="Changes" comment="First commit: the connection between the server and the client">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/DataAccessObjects/AppointmentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/DataAccessObjects/AppointmentDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/DataAccessObjects/ClientDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/DataAccessObjects/ClientDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/DataAccessObjects/EmployeeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/DataAccessObjects/EmployeeDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/DataAccessObjects/PaymentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/DataAccessObjects/PaymentDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/DataAccessObjects/ProcedureDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/DataAccessObjects/ProcedureDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/Enums/RequestType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/Enums/RequestType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/Models/Entities/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/Models/Entities/Appointment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/Models/Entities/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/Models/Entities/Payment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/Models/TCP/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/Models/TCP/Request.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/Utility/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/Utility/ClientThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/condorcet/Utils/LocalDateTimeAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/condorcet/Utils/LocalDateTimeAdapter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,6 +88,15 @@
       <workItem from="1732913627052" duration="701000" />
       <workItem from="1732947492442" duration="5815000" />
       <workItem from="1732998600178" duration="3211000" />
+      <workItem from="1733067669371" duration="4803000" />
+      <workItem from="1733082029809" duration="2286000" />
+      <workItem from="1733123725142" duration="1775000" />
+      <workItem from="1733155606445" duration="6874000" />
+      <workItem from="1733231693182" duration="668000" />
+      <workItem from="1733269236028" duration="49000" />
+      <workItem from="1733308392165" duration="827000" />
+      <workItem from="1733509488181" duration="2634000" />
+      <workItem from="1733516050076" duration="6729000" />
     </task>
     <servers />
   </component>
@@ -102,7 +112,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/condorcet/Utility/ClientThread.java</url>
-          <line>390</line>
+          <line>387</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>

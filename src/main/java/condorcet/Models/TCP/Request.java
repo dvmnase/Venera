@@ -5,6 +5,8 @@ import main.Enums.RequestType;
 public class Request {
     private RequestType requestType;
     private String requestMessage;
+
+    private int appointmentId;
     private int clientId; // Новое поле для хранения ID клиента
 
     public Request() {}
@@ -37,5 +39,13 @@ public class Request {
 
     public void setClientId(int clientId) { // Метод для установки clientId
         this.clientId = clientId;
+    }
+
+    public int getAppointmentId() {
+        return appointmentId;
+    }
+
+    public void setAppointmentId(int appointmentId) {
+        this.appointmentId = appointmentId;
     }
 }

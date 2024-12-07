@@ -1,6 +1,7 @@
 package condorcet.Models.Entities;
 
 public class Payment {
+
     private Float amount;
     private String paymentMethod;
     private int appointment_id;

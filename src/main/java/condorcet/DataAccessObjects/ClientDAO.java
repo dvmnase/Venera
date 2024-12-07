@@ -1,8 +1,11 @@
 package condorcet.DataAccessObjects;
 
 import condorcet.Models.Entities.Client;
+import condorcet.Models.Entities.Employee;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ClientDAO {
@@ -27,5 +30,24 @@ public class ClientDAO {
             stmt.setInt(5, userId);  // Добавляем user_id
             stmt.executeUpdate();
         }
+    }
+
+    public Client getClientById(int clientId) throws SQLException{
+        Client client =null;
+        String query ="SELECT id, name, surname, phone,sex FROM clients WHERE id=?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, clientId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    client = new Client();
+                    client.setId(rs.getInt("id"));
+                    client.setName(rs.getString("name"));
+                    client.setSurname(rs.getString("surname"));
+                    client.setPhone(rs.getString("phone"));
+                    client.setSex(rs.getString("sex"));
+                }
+            }
+        }
+        return client;
     }
 }

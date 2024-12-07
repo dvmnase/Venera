@@ -32,4 +32,31 @@ public class PaymentDAO {
         }
     }
 
+    public Payment getPaymentByAppointmentId(int appointmentId) throws SQLException {
+        String query = "SELECT * FROM payments WHERE appointment_id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, appointmentId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    Payment payment = new Payment();
+                    payment.setAmount(resultSet.getFloat("amount"));
+                    payment.setPaymentMethod(resultSet.getString("payment_method"));
+                    payment.setAppointment_id(resultSet.getInt("appointment_id"));
+                    return payment;
+                }
+            }
+        }
+        return null; // Если запись о платеже не найдена
+    }
+
+    public void deletePaymentByAppointmentId(int appointmentId) throws SQLException {
+        String query = "DELETE FROM payments WHERE appointment_id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, appointmentId);
+            stmt.executeUpdate();
+            System.out.println("Платеж с appointment_id " + appointmentId + " удален.");
+        }
+    }
+
+
 }

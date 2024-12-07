@@ -16,10 +16,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -422,6 +419,7 @@ public class ClientThread implements Runnable {
                                 AppointmentDAO appointmentDAO = new AppointmentDAO(connection);
                                 ProcedureDAO procedureDAO = new ProcedureDAO(connection);
                                 EmployeeDAO employeeDAO = new EmployeeDAO(connection);
+                                PaymentDAO paymentDAO = new PaymentDAO(connection); // Добавляем PaymentDAO
 
                                 List<Appointment> appointments = appointmentDAO.getAppointmentsByClientId(clientId);
                                 List<Map<String, Object>> appointmentsData = new ArrayList<>();
@@ -429,20 +427,26 @@ public class ClientThread implements Runnable {
                                 for (Appointment appointment : appointments) {
                                     Procedure procedure = procedureDAO.getProcedureById(appointment.getProcedureId());
                                     Employee employee = employeeDAO.getEmployeeById(appointment.getEmployeeId());
+                                    Payment payment = paymentDAO.getPaymentByAppointmentId(appointment.getId()); // Получаем данные о платеже
 
                                     Map<String, Object> appointmentDetails = new HashMap<>();
                                     appointmentDetails.put("appointment_id", appointment.getId());
-
-                                    // Не форматируем дату здесь, просто передаем объект
                                     appointmentDetails.put("appointment_date", appointment.getAppointmentDate());
-                                    //System.out.println("Raw appointment date: " + appointment.getAppointmentDate());
-
                                     appointmentDetails.put("notes", appointment.getNotes());
                                     appointmentDetails.put("procedure", procedure);
                                     appointmentDetails.put("employee", employee);
 
-                                    appointmentsData.add(appointmentDetails);
+                                    // Добавляем информацию о платеже, если она существует
+                                    if (payment != null) {
+                                        Map<String, Object> paymentDetails = new HashMap<>();
+                                        paymentDetails.put("amount", payment.getAmount());
+                                        paymentDetails.put("payment_method", payment.getPaymentMethod());
+                                        appointmentDetails.put("payment", paymentDetails);
+                                    } else {
+                                        appointmentDetails.put("payment", null); // Если данных о платеже нет
+                                    }
 
+                                    appointmentsData.add(appointmentDetails);
                                 }
 
                                 Gson gson = new GsonBuilder()
@@ -463,6 +467,203 @@ public class ClientThread implements Runnable {
                             break;
                         }
 
+
+                        case CANCEL_APPOINTMENT: {
+                            int appointmentId = request.getAppointmentId(); // Получаем ID записи из запроса
+
+                            PaymentDAO paymentDAO = new PaymentDAO(connection);
+                            AppointmentDAO appointmentDAO = new AppointmentDAO(connection);
+
+                            try {
+                                // Удаление платежа
+                                paymentDAO.deletePaymentByAppointmentId(appointmentId);
+
+                                // Удаление записи
+                                appointmentDAO.deleteAppointmentById(appointmentId);
+
+                                // Успешный ответ
+                                response.setStatus("SUCCESS");
+                                response.setMessage("Запись с ID " + appointmentId + " успешно отменена.");
+
+                                System.out.println("Запись с ID " + appointmentId + " и связанный платеж удалены.");
+                            } catch (SQLException e) {
+                                System.out.println("Ошибка при отмене записи: " + e.getMessage());
+                                response.setStatus("ERROR");
+                                response.setMessage("Не удалось отменить запись: " + e.getMessage());
+                            }
+
+                            // Отправка ответа клиенту
+                            out.println(gson.toJson(response));
+                            break;
+                        }
+                        case EDIT_APPOINTMENT: {
+                            int appointmentId = request.getAppointmentId();
+                            LocalDateTime newDateTime = LocalDateTime.parse(request.getRequestMessage());
+
+                            AppointmentDAO appointmentDAO = new AppointmentDAO(connection);
+
+                            try {
+                                // Обновление записи в базе данных
+                                appointmentDAO.updateAppointmentDate(appointmentId, newDateTime);
+
+                                // Успешный ответ
+                                response.setStatus("SUCCESS");
+                                response.setMessage("Запись успешно перенесена.");
+                            } catch (SQLException e) {
+                                System.out.println("Ошибка при переносе записи: " + e.getMessage());
+                                response.setStatus("ERROR");
+                                response.setMessage("Не удалось перенести запись: " + e.getMessage());
+                            }
+
+                            // Отправка ответа клиенту
+                            out.println(gson.toJson(response));
+                            break;
+                        }
+                        case SEARCH_PROCEDURES:{
+
+
+                                String Query = request.getRequestMessage();
+                                System.out.println("Запрос юзер: " + Query);
+
+                                ProcedureDAO procedureDAO = new ProcedureDAO(connection);
+                            List<Procedure> procedures = procedureDAO.searchProcedures(Query);
+
+
+                            response.setStatus("SUCCESS");
+                            response.setMessage(gson.toJson(procedures));
+
+                            out.println(gson.toJson(response));
+                                break;
+                        }
+                        case GET_EMPLOYEES: {
+                            try {
+                                int userId = request.getClientId();
+                                System.out.println("Employee ID: " + userId);
+
+                                AppointmentDAO appointmentDAO = new AppointmentDAO(connection);
+                                ProcedureDAO procedureDAO = new ProcedureDAO(connection);
+                                ClientDAO clientDAO = new ClientDAO(connection);
+                                EmployeeDAO employeeDAO = new EmployeeDAO(connection);
+
+                                Employee employee = employeeDAO.getEmployeeByUserId(userId);
+                                int employeeId = employee.getId();
+                                List<Appointment> appointments = appointmentDAO.getAppointmentsByEmployeeId(employeeId);
+                                List<Map<String, Object>> appointmentsData = new ArrayList<>();
+
+                                for (Appointment appointment : appointments) {
+                                    Procedure procedure = procedureDAO.getProcedureById(appointment.getProcedureId());
+                                    Client client = clientDAO.getClientById(appointment.getClientId());
+
+                                    Map<String, Object> appointmentDetails = new HashMap<>();
+                                    appointmentDetails.put("appointment_id", appointment.getId());
+                                    appointmentDetails.put("appointment_date", appointment.getAppointmentDate());
+                                    appointmentDetails.put("notes", appointment.getNotes());
+                                    appointmentDetails.put("procedure", procedure);
+                                    appointmentDetails.put("client", client);
+
+                                    appointmentsData.add(appointmentDetails);
+                                }
+
+                                Gson gson = new GsonBuilder()
+                                        .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                                        .create();
+
+                                Response response = new Response();
+                                response.setStatus("SUCCESS");
+                                response.setMessage(gson.toJson(appointmentsData));
+                                out.println(gson.toJson(response));
+                            } catch (SQLException e) {
+                                System.out.println("Database error: " + e.getMessage());
+                                Response response = new Response();
+                                response.setStatus("ERROR");
+                                response.setMessage("Failed to fetch appointments: " + e.getMessage());
+                                out.println(gson.toJson(response));
+                            }
+                            break;
+                        }
+                        case GET_STATISTICS_PROCEDURES: {
+                            try {
+                                ProcedureDAO procedureDAO = new ProcedureDAO(connection);
+
+                                // Получаем статистику сотрудников
+                                List<Map<String, Object>> procedureStatistics = procedureDAO.getProcedureStatistics();
+
+                                Gson gson = new GsonBuilder()
+                                        .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                                        .create();
+
+                                Response response = new Response();
+                                response.setStatus("SUCCESS");
+                                response.setMessage(gson.toJson(procedureStatistics));
+                                out.println(gson.toJson(response));
+                            } catch (SQLException e) {
+                                System.out.println("Database error: " + e.getMessage());
+                                Response response = new Response();
+                                response.setStatus("ERROR");
+                                response.setMessage("Failed to fetch employee statistics: " + e.getMessage());
+                                out.println(gson.toJson(response));
+                            }
+                            break;
+                        }
+
+                        case GET_STATISTICS_EMPLOYEES: {
+                            try {
+                                EmployeeDAO employeeDAO = new EmployeeDAO(connection);
+
+                                // Получаем статистику сотрудников
+                                List<Map<String, Object>> employeeStatistics = employeeDAO.getEmployeeStatistics();
+
+                                Gson gson = new GsonBuilder()
+                                        .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                                        .create();
+
+                                Response response = new Response();
+                                response.setStatus("SUCCESS");
+                                response.setMessage(gson.toJson(employeeStatistics));
+                                out.println(gson.toJson(response));
+                            } catch (SQLException e) {
+                                System.out.println("Database error: " + e.getMessage());
+                                Response response = new Response();
+                                response.setStatus("ERROR");
+                                response.setMessage("Failed to fetch employee statistics: " + e.getMessage());
+                                out.println(gson.toJson(response));
+                            }
+                            break;
+                        }
+                        case GET_STATISTICS_VISIT: {
+                            try {
+                                AppointmentDAO appointmentDAO = new AppointmentDAO(connection);
+
+                                // Получаем статистику посещений
+                                Map<String, Double> visitStatistics = appointmentDAO.getVisitStatistics();
+
+                                // Формируем список для отправки
+                                List<Map<String, Object>> result = new ArrayList<>();
+                                for (Map.Entry<String, Double> entry : visitStatistics.entrySet()) {
+                                    Map<String, Object> entryMap = new HashMap<>();
+                                    entryMap.put("date", entry.getKey());
+                                    entryMap.put("total_amount", entry.getValue());
+                                    result.add(entryMap);
+                                }
+
+                                // Отправляем ответ клиенту
+                                Gson gson = new GsonBuilder()
+                                        .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                                        .create();
+
+                                Response response = new Response();
+                                response.setStatus("SUCCESS");
+                                response.setMessage(gson.toJson(result));
+                                out.println(gson.toJson(response));
+                            } catch (SQLException e) {
+                                System.out.println("Database error: " + e.getMessage());
+                                Response response = new Response();
+                                response.setStatus("ERROR");
+                                response.setMessage("Failed to fetch visit statistics: " + e.getMessage());
+                                out.println(gson.toJson(response));
+                            }
+                            break;
+                        }
                     }
                 } catch (IOException e) {
                     System.out.println("Error reading client message: " + e.getMessage());

@@ -1,5 +1,6 @@
 package condorcet.DataAccessObjects;
 
+import condorcet.Models.Entities.Employee;
 import condorcet.Models.Entities.Procedure;
 import condorcet.Models.Entities.User;
 import java.sql.Connection;
@@ -7,7 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProcedureDAO {
     private Connection connection;
@@ -159,6 +162,79 @@ public class ProcedureDAO {
         return procedures;
     }
 
+    public List<Procedure> searchProcedures(String query) {
+        List<Procedure> results = new ArrayList<>();
+        String sql = "SELECT * FROM procedures WHERE LOWER(title) LIKE LOWER(?)";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+
+            stmt.setString(1, "%" + query + "%");
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Procedure procedure = new Procedure();
+                procedure.setId(rs.getInt("id"));
+                procedure.setTitle(rs.getString("title"));
+                procedure.setDescription(rs.getString("description"));
+                procedure.setDuration(rs.getInt("duration"));
+                procedure.setPrice(rs.getFloat("price"));
+                procedure.setService_type(rs.getString("service_type"));
+                results.add(procedure);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return results;
+    }
+
+    public List<Map<String, Object>> getProcedureStatistics() throws SQLException {
+        // SQL для подсчета общего количества записей
+        String totalAppointmentsQuery = "SELECT COUNT(*) AS total_count FROM appointments";
+        int totalAppointments = 0;
+
+        // Получаем общее количество записей
+        try (PreparedStatement stmt = connection.prepareStatement(totalAppointmentsQuery);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                totalAppointments = rs.getInt("total_count");
+            }
+        }
+
+        if (totalAppointments == 0) {
+            throw new SQLException("No appointments found in the database.");
+        }
+
+        // SQL для подсчета записей по каждому employee_id
+        String employeeStatsQuery = "SELECT procedure_id, COUNT(*) AS appointment_count " +
+                "FROM appointments " +
+                "GROUP BY procedure_id";
+        List<Map<String, Object>> procedureStatistics = new ArrayList<>();
+
+        try (PreparedStatement stmt = connection.prepareStatement(employeeStatsQuery);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                int procedureId = rs.getInt("procedure_id");
+                int appointmentCount = rs.getInt("appointment_count");
+
+                // Вычисляем процент
+                double percentage = (appointmentCount / (double) totalAppointments) * 100;
+
+                // Получаем данные сотрудника
+                Procedure procedure = getProcedureById(procedureId);
+                if (procedure != null) {
+                    Map<String, Object> employeeData = new HashMap<>();
+                    employeeData.put("procedure", procedure);
+                    employeeData.put("percentage", percentage);
+                    procedureStatistics.add(employeeData);
+                }
+            }
+        }
+
+        return procedureStatistics;
+    }
 }
 
 
